@@ -3,3 +3,6 @@
 
 #include "MariGameModeBase.h"
 
+AMariGameModeBase::AMariGameModeBase()
+{
+}

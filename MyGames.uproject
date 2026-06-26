@@ -1,8 +1,6 @@
 {
 	"FileVersion": 3,
 	"EngineAssociation": "5.7",
-	"Category": "",
-	"Description": "",
 	"Modules": [
 		{
 			"Name": "MyGames",
@@ -13,10 +11,19 @@
 	"Plugins": [
 		{
 			"Name": "ModelingToolsEditorMode",
-			"Enabled": true,
-			"TargetAllowList": [
-				"Editor"
-			]
+			"Enabled": true
+		},
+		{
+			"Name": "RemoteControl",
+			"Enabled": true
+		},
+		{
+			"Name": "RemoteControlWebInterface",
+			"Enabled": true
+		},
+		{
+			"Name": "MCPUnreal",
+			"Enabled": true
 		}
 	]
 }

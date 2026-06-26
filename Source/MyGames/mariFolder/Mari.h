@@ -13,7 +13,7 @@ class UInputAction;
 struct FInputActionValue;
 
 UCLASS()
-class GAMEENGINE1PROJECT_API AMari : public ACharacter
+class MYGAMES_API AMari : public ACharacter
 {
 	GENERATED_BODY()
 public:
@@ -49,9 +49,9 @@ public:
 
 protected:
 	// Called when the game starts or when spawned
-	virtual void BeginPlay() override;
 
 public:	
+	virtual void BeginPlay() override;
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 

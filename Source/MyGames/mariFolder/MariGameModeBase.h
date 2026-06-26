@@ -10,8 +10,11 @@
  * 
  */
 UCLASS()
-class GAMEENGINE1PROJECT_API AMariGameModeBase : public AGameModeBase
+class MYGAMES_API AMariGameModeBase : public AGameModeBase
 {
 	GENERATED_BODY()
+	
+public:
+	AMariGameModeBase();
 	
 };
