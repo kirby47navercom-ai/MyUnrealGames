@@ -31,6 +31,8 @@ protected:
 	UInputAction *LookAction;
 	UPROPERTY(EditAnywhere,Category = "Input")
 	UInputAction *MouseLookAction;
+	UPROPERTY(EditAnywhere,Category = "Input")
+	UInputAction *RunAction;
 protected:
 	void Move(const FInputActionValue& Value);
 	void Look(const FInputActionValue& Value);
@@ -47,6 +49,10 @@ public:
 	virtual void DoJumpStart();
 	UFUNCTION(BlueprintCallable, Category = "Input")
 	virtual void DoJumpEnd();
+	UFUNCTION(BlueprintCallable, Category = "Input")
+	virtual void RunStart();
+	UFUNCTION(BlueprintCallable, Category = "Input")
+	virtual void RunEnd();
 	
 public:
 	UPROPERTY(EditAnywhere,BlueprintReadWrite,Category = "TimelineTurn")
@@ -70,6 +76,10 @@ private:
 	UPROPERTY(EditAnywhere,Category = "Input")
 	FVector2D JumpGravityScale{1.0f,2.5f};
 	void DoJump(const FVector2D &jumpGravityScale);
+public:
+	UPROPERTY(BlueprintReadOnly,Category = "Movement")
+	float MoveInputAmount =0.f;
+	
 	
 	
 public:

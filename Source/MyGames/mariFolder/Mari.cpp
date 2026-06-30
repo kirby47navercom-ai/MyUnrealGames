@@ -60,8 +60,11 @@ void AMari::DoMove(float Right, float Forward)
 		FRotator Walk = {0,Rotation.Yaw,0};
 		FVector FowardVector = FRotationMatrix(Walk).GetUnitAxis(EAxis::Y);
 		FVector RightVector = FRotationMatrix(Walk).GetUnitAxis(EAxis::X);
-		AddMovementInput(FowardVector,Forward);
-		AddMovementInput(RightVector,Right);
+		// AddMovementInput(FowardVector,Forward);
+		// AddMovementInput(RightVector,Right);
+		FVector2D input(Right,Forward);
+		MoveInputAmount = input.Size();
+		MoveInputAmount = FMath::Clamp(MoveInputAmount,0.0f,1.0f);
 		
 		TurnDirection = FowardVector*Forward+RightVector*Right;
 		if (TurnDirection.IsNearlyZero()) return;
@@ -94,6 +97,15 @@ void AMari::DoJumpStart()
 void AMari::DoJumpEnd()
 {
 	StopJumping();
+}
+
+void AMari::RunStart()
+{
+	GetCharacterMovement()->MaxWalkSpeed  = 500.0f;
+}
+void AMari::RunEnd()
+{
+	GetCharacterMovement()->MaxWalkSpeed  = 300.0f;
 }
 
 void AMari::UpdateTurn(float Alpha)
@@ -197,6 +209,8 @@ void AMari::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 		EnhancedInputComponent->BindAction(MoveAction,ETriggerEvent::Triggered,this,&AMari::Move);
 		EnhancedInputComponent->BindAction(MoveAction,ETriggerEvent::Completed,this,&AMari::MoveEnd);
 		EnhancedInputComponent->BindAction(MouseLookAction,ETriggerEvent::Triggered,this,&AMari::Look);
+		EnhancedInputComponent->BindAction(RunAction,ETriggerEvent::Started,this,&AMari::RunStart);
+		EnhancedInputComponent->BindAction(RunAction,ETriggerEvent::Completed,this,&AMari::RunEnd);
 		
 	}
 	else

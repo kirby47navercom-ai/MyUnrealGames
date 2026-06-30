@@ -24,6 +24,8 @@ public:
 	float Speed;
 	UPROPERTY(BlueprintReadOnly)
 	bool bIsFalling;
+	UPROPERTY(BlueprintReadOnly, Category="Movement")
+	float MoveInputAmount = 0.f;
 private:
 	UPROPERTY()
 	APawn *OwnerPawn = nullptr;

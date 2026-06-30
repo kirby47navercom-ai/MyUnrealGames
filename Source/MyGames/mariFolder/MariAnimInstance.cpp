@@ -4,6 +4,7 @@
 #include "MariAnimInstance.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "GameFramework/Character.h"
+#include "Mari.h"
 
 void UMariAnimInstance::NativeInitializeAnimation()
 {
@@ -26,6 +27,8 @@ void UMariAnimInstance::NativeUpdateAnimation(float DeltaSeconds)
 	Velocity.Z = 0.0f;
 	Speed = Velocity.Size();
 	
+	if (AMari *Mari = Cast<AMari>(OwnerPawn)) 
+		MoveInputAmount = Mari->MoveInputAmount;
 	if (ACharacter* Character = Cast<ACharacter>(OwnerPawn)) bIsFalling = Character->GetCharacterMovement()->IsFalling();
 		
 	
