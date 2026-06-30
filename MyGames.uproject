@@ -1,11 +1,16 @@
 {
 	"FileVersion": 3,
 	"EngineAssociation": "5.7",
+	"Category": "",
+	"Description": "",
 	"Modules": [
 		{
 			"Name": "MyGames",
 			"Type": "Runtime",
-			"LoadingPhase": "Default"
+			"LoadingPhase": "Default",
+			"AdditionalDependencies": [
+				"Engine"
+			]
 		}
 	],
 	"Plugins": [

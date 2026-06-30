@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include "memory"
+#include "Components/TimelineComponent.h"
 #include "Mari.generated.h"
 
 class USpringArmComponent;
@@ -34,14 +35,40 @@ protected:
 	void Move(const FInputActionValue& Value);
 	void Look(const FInputActionValue& Value);
 public:
+	
 	UFUNCTION(BlueprintCallable, Category = "Input")
 	virtual void DoMove(float Right, float Forward);
+	UFUNCTION(BlueprintCallable, Category = "Input")
+	virtual void MoveEnd();
 	UFUNCTION(BlueprintCallable, Category = "Input")
 	virtual void DoLook(float Yaw, float Pitch);
 	UFUNCTION(BlueprintCallable, Category = "Input")
 	virtual void DoJumpStart();
 	UFUNCTION(BlueprintCallable, Category = "Input")
 	virtual void DoJumpEnd();
+	
+public:
+	UPROPERTY(EditAnywhere,BlueprintReadWrite,Category = "TimelineTurn")
+	UCurveFloat *TurnCurve;
+	
+	FRotator TurnStart;
+	FRotator TurnEnd;
+	
+	UFUNCTION()
+	void UpdateTurn(float Alpha);
+	UFUNCTION()
+	void FinishTurn();
+
+	FTimeline TurnTimeline;
+	
+	void StartTurnTo(const FVector &Direction);
+	FVector LastTurnDir = FVector::ZeroVector;
+	FVector TurnDirection;
+private:
+	UPROPERTY(EditAnywhere,Category = "Input")
+	FVector2D JumpGravityScale{1.0f,2.5f};
+	void DoJump(const FVector2D &jumpGravityScale);
+	
 	
 public:
 	// Sets default values for this character's properties
