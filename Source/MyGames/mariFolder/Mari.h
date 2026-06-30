@@ -35,7 +35,8 @@ protected:
 	void Move(const FInputActionValue& Value);
 	void Look(const FInputActionValue& Value);
 public:
-	
+	UFUNCTION(BlueprintCallable, Category = "Input")
+	virtual void MoveStart();
 	UFUNCTION(BlueprintCallable, Category = "Input")
 	virtual void DoMove(float Right, float Forward);
 	UFUNCTION(BlueprintCallable, Category = "Input")
@@ -64,6 +65,7 @@ public:
 	void StartTurnTo(const FVector &Direction);
 	FVector LastTurnDir = FVector::ZeroVector;
 	FVector TurnDirection;
+	float TurnTime=0.f;
 private:
 	UPROPERTY(EditAnywhere,Category = "Input")
 	FVector2D JumpGravityScale{1.0f,2.5f};
@@ -84,5 +86,7 @@ public:
 
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+private:
+	float deltaTime;
 
 };

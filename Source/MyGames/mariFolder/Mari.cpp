@@ -45,28 +45,35 @@ void AMari::Look(const FInputActionValue& Value)
 	DoLook(Value.Get<FVector2D>().X,Value.Get<FVector2D>().Y);
 }
 
+void AMari::MoveStart()
+{
+	TurnTime = 0.0f;
+}
+
 void AMari::DoMove(float Right, float Forward)
 {
 	if (GetController()!=nullptr)
 	{
+		TurnTime+=deltaTime;
 		
 		FRotator Rotation = GetController()->GetControlRotation();
 		FRotator Walk = {0,Rotation.Yaw,0};
 		FVector FowardVector = FRotationMatrix(Walk).GetUnitAxis(EAxis::Y);
 		FVector RightVector = FRotationMatrix(Walk).GetUnitAxis(EAxis::X);
-		//AddMovementInput(FowardVector,Forward);
-		//AddMovementInput(RightVector,Right);
+		AddMovementInput(FowardVector,Forward);
+		AddMovementInput(RightVector,Right);
 		
 		TurnDirection = FowardVector*Forward+RightVector*Right;
 		if (TurnDirection.IsNearlyZero()) return;
 		TurnDirection.Normalize();
-		AddMovementInput(TurnDirection,1.0f);
-		// StartTurnTo(direction);
+		//AddMovementInput(TurnDirection,1.0f);
+		//StartTurnTo(direction);
 	}
 }
 
 void AMari::MoveEnd()
 {
+	if (TurnTime <0.1f)
 	StartTurnTo(TurnDirection);
 }
 
@@ -171,6 +178,7 @@ AMari::AMari()
 void AMari::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+	deltaTime = DeltaTime;
 	
 	TurnTimeline.TickTimeline(DeltaTime);
 	DoJump(JumpGravityScale);
@@ -185,6 +193,7 @@ void AMari::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 	{
 		EnhancedInputComponent->BindAction(JumpAction,ETriggerEvent::Started,this,&AMari::DoJumpStart);
 		EnhancedInputComponent->BindAction(JumpAction,ETriggerEvent::Completed,this,&AMari::DoJumpEnd);
+		EnhancedInputComponent->BindAction(MoveAction,ETriggerEvent::Started,this,&AMari::MoveStart);
 		EnhancedInputComponent->BindAction(MoveAction,ETriggerEvent::Triggered,this,&AMari::Move);
 		EnhancedInputComponent->BindAction(MoveAction,ETriggerEvent::Completed,this,&AMari::MoveEnd);
 		EnhancedInputComponent->BindAction(MouseLookAction,ETriggerEvent::Triggered,this,&AMari::Look);
