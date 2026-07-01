@@ -80,6 +80,10 @@ public:
 	UPROPERTY(BlueprintReadOnly,Category = "Movement")
 	float MoveInputAmount =0.f;
 	
+	UPROPERTY(EditAnywhere,Category = "MoveSpeed")
+	float WalkSpeed =200.f;
+	UPROPERTY(EditAnywhere,Category = "MoveSpeed")
+	float RunSpeed =300.f;
 	
 	
 public:

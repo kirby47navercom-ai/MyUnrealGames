@@ -60,15 +60,18 @@ void AMari::DoMove(float Right, float Forward)
 		FRotator Walk = {0,Rotation.Yaw,0};
 		FVector FowardVector = FRotationMatrix(Walk).GetUnitAxis(EAxis::Y);
 		FVector RightVector = FRotationMatrix(Walk).GetUnitAxis(EAxis::X);
-		// AddMovementInput(FowardVector,Forward);
-		// AddMovementInput(RightVector,Right);
+		AddMovementInput(FowardVector,Forward);
+		AddMovementInput(RightVector,Right);
 		FVector2D input(Right,Forward);
-		MoveInputAmount = input.Size();
-		MoveInputAmount = FMath::Clamp(MoveInputAmount,0.0f,1.0f);
+		//MoveInputAmount = input.Size();
+		//MoveInputAmount = FMath::Clamp(MoveInputAmount,0.0f,1.0f);
 		
 		TurnDirection = FowardVector*Forward+RightVector*Right;
 		if (TurnDirection.IsNearlyZero()) return;
+		//SetActorRotation(TurnDirection.Rotation());
 		TurnDirection.Normalize();
+
+		
 		//AddMovementInput(TurnDirection,1.0f);
 		//StartTurnTo(direction);
 	}
@@ -76,6 +79,7 @@ void AMari::DoMove(float Right, float Forward)
 
 void AMari::MoveEnd()
 {
+	//MoveInputAmount =0.0f;
 	if (TurnTime <0.1f)
 	StartTurnTo(TurnDirection);
 }
@@ -101,11 +105,11 @@ void AMari::DoJumpEnd()
 
 void AMari::RunStart()
 {
-	GetCharacterMovement()->MaxWalkSpeed  = 500.0f;
+	GetCharacterMovement()->MaxWalkSpeed  = RunSpeed;
 }
 void AMari::RunEnd()
 {
-	GetCharacterMovement()->MaxWalkSpeed  = 300.0f;
+	GetCharacterMovement()->MaxWalkSpeed  = WalkSpeed;
 }
 
 void AMari::UpdateTurn(float Alpha)
@@ -174,7 +178,7 @@ AMari::AMari()
 	GetMesh()->SetRelativeScale3D(FVector{0.1f,0.1f,0.1f});
 	
 	GetCharacterMovement()->bOrientRotationToMovement = true;
-	GetCharacterMovement()->MaxWalkSpeed = 300.0f;
+	GetCharacterMovement()->MaxWalkSpeed = WalkSpeed;
 	GetCharacterMovement()->RotationRate = FRotator(0.0f, 720.0f, 0.0f);
 	GetCharacterMovement()->AirControl = 0.6f;
 	GetCharacterMovement()->JumpZVelocity = 350.0f;
