@@ -22,5 +22,13 @@ protected:
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
+protected:
+	
+	UPROPERTY(VisibleAnywhere,BlueprintReadWrite,Category = Stat)
+	int32 Hp=200;
+	UPROPERTY(VisibleAnywhere)
+	int32 Mp=50;
+	UPROPERTY(VisibleAnywhere)
+	float Speed = 3.5f;
 
 };

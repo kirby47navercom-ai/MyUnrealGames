@@ -10,6 +10,7 @@ void UMariAnimInstance::NativeInitializeAnimation()
 {
 	Super::NativeInitializeAnimation();
 	OwnerPawn = TryGetPawnOwner();
+	
 }
 
 void UMariAnimInstance::NativeUpdateAnimation(float DeltaSeconds)

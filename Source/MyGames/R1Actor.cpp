@@ -3,6 +3,9 @@
 
 #include "R1Actor.h"
 
+#include "R1LogChannels.h"
+#include "../../Intermediate/Build/Win64/x64/UnrealEditor/Development/MyGames/Definitions.MyGames.h"
+
 // Sets default values
 AR1Actor::AR1Actor()
 {
@@ -15,7 +18,8 @@ AR1Actor::AR1Actor()
 void AR1Actor::BeginPlay()
 {
 	Super::BeginPlay();
-	
+	//UE_LOG(LogMyGamesR1, Warning, TEXT("AR1Actor::BeginPlay()"));
+	GEngine -> ForceGarbageCollection(true);
 }
 
 // Called every frame
