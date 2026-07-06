@@ -19,7 +19,25 @@ void AMariController::SetupInputComponent()
 				Subsystem->AddMappingContext(CurrentContext,0);
 			}
 		}
+		
 	}
+
 	
 	
+}
+
+void AMariController::BeginPlay()
+{
+	Super::BeginPlay();
+	if (IsLocalPlayerController())
+	{
+		if (UEnhancedInputLocalPlayerSubsystem* Subsystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(GetLocalPlayer()))
+		{
+			for (UInputMappingContext* CurrentContext : DefaultMappingContexts)
+			{
+				Subsystem->AddMappingContext(CurrentContext,0);
+			}
+		}
+		
+	}
 }

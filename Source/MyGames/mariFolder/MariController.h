@@ -24,6 +24,8 @@ protected:
 	
 	virtual void SetupInputComponent() override;
 	
+	virtual void BeginPlay() override;
+	
 	
 	
 };
