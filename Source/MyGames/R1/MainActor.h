@@ -5,7 +5,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "MainActor.generated.h"
-
+class AR1Actor;
 UCLASS()
 class MYGAMES_API AMainActor : public AActor
 {
@@ -23,6 +23,10 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 	
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	TObjectPtr<class AR1Actor> Actor;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite,Category = Actor)
+	TSubclassOf<AR1Actor> Actor;
+	//UPROPERTY(EditAnywhere, BlueprintReadWrite,Category = Actor)
+	//TSubclassOf<AR1Actor> ActorClass;
+	
+	
 };

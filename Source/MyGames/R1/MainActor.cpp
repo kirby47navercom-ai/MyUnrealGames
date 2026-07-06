@@ -16,13 +16,16 @@ AMainActor::AMainActor()
 void AMainActor::BeginPlay()
 {
 	Super::BeginPlay();
-	
 	FVector Location{0,0,0};
 	FRotator Rotation{0,0,0};
-	Actor = GetWorld()->SpawnActor<AR1Actor>(Location, Rotation) ;
+	AR1Actor *Actor2 = GetWorld()->SpawnActor<AR1Actor>(Actor,Location,Rotation);
 	
-	Actor->SetLifeSpan(5.0f);
-	//GetWorld()->DestroyActor(Actor);
+	if (IsValid(Actor2))
+	{
+	
+		Actor2->SetLifeSpan(5.0f);
+		//GetWorld()->DestroyActor(Actor);
+	}
 }
 
 // Called every frame
