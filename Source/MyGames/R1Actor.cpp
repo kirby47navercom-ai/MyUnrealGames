@@ -5,13 +5,17 @@
 
 #include "R1LogChannels.h"
 #include "../../Intermediate/Build/Win64/x64/UnrealEditor/Development/MyGames/Definitions.MyGames.h"
+#include "Components/BoxComponent.h"
+#include "Components/StaticMeshComponent.h"
+
 
 // Sets default values
 AR1Actor::AR1Actor()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
-
+	Box = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Box"));
+	
 }
 
 // Called when the game starts or when spawned
