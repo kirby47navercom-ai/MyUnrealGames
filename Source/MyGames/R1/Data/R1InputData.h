@@ -13,20 +13,20 @@
 class UInputAction;
 class UInputMappingContext;
 
-USTRUCT()
+USTRUCT(BlueprintType)
 struct FR1InputAction
 {
 	GENERATED_BODY()
 public:
-	UPROPERTY(EditDefaultsOnly)
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Input")
 	FGameplayTag InputTag = FGameplayTag::EmptyTag;
 	
-	UPROPERTY(EditDefaultsOnly)
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Input")
 	TObjectPtr<UInputAction> InputAction = nullptr;
 	
 };
 
-UCLASS()
+UCLASS(BlueprintType)
 class MYGAMES_API UR1InputData : public UDataAsset
 {
 	GENERATED_BODY()
@@ -34,10 +34,10 @@ public:
 	const UInputAction* FindInputActionByTag(const FGameplayTag& InputTag) const;
 
 public:
-	UPROPERTY(EditDefaultsOnly)
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Input")
 	TObjectPtr<UInputMappingContext> InputMappingContext;
 
-	UPROPERTY(EditDefaultsOnly)
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Input")
 	TArray<FR1InputAction> InputActions;
 	
 };

@@ -7,6 +7,17 @@
 void UR1AssetData::PreSave(FObjectPreSaveContext ObjectSaveContext)
 {
 	Super::PreSave(ObjectSaveContext);
+	RebuildLookupMaps();
+}
+
+void UR1AssetData::PostLoad()
+{
+	Super::PostLoad();
+	RebuildLookupMaps();
+}
+
+void UR1AssetData::RebuildLookupMaps()
+{
 
 	AssetNameToPath.Empty();
 	AssetLabelToSet.Empty();
@@ -42,15 +53,16 @@ void UR1AssetData::PreSave(FObjectPreSaveContext ObjectSaveContext)
 
 FSoftObjectPath UR1AssetData::GetAssetPathByName(const FName& AssetName)
 {
-	FSoftObjectPath* AssetPath = AssetNameToPath.Find(AssetName);
+	const FSoftObjectPath* AssetPath = AssetNameToPath.Find(AssetName);
 	ensureAlwaysMsgf(AssetPath, TEXT("Can't find Asset Path from Asset Name [%s]."), *AssetName.ToString());
-	return *AssetPath;
+	return AssetPath ? *AssetPath : FSoftObjectPath();
 }
 
 const FAssetSet& UR1AssetData::GetAssetSetByLabel(const FName& Label)
 {
 	const FAssetSet* AssetSet = AssetLabelToSet.Find(Label);
 	ensureAlwaysMsgf(AssetSet, TEXT("Can't find Asset Set from Label [%s]."), *Label.ToString());
-	return *AssetSet;
+	static const FAssetSet EmptyAssetSet;
+	return AssetSet ? *AssetSet : EmptyAssetSet;
 }
 

@@ -8,6 +8,7 @@
 #include "Kismet/KismetMathLibrary.h"
 #include "MyGames/R1/System/R1AssetManager.h"
 #include "../R1GameplayTags.h"
+#include "MyGames/R1/Character/R1Player.h"
 
 
 AR1PlayerController::AR1PlayerController(const FObjectInitializer& ObjectInitializer)
@@ -42,7 +43,13 @@ void AR1PlayerController::SetupInputComponent()
 
 		auto Action2 = InputData->FindInputActionByTag(R1GameplayTags::Input_Action_Turn);
 		EnhancedInputComponent->BindAction(Action2, ETriggerEvent::Triggered, this, &ThisClass::Input_Turn);
-
+		
+		auto Action3 = InputData->FindInputActionByTag(R1GameplayTags::Input_Action_Jump);
+		EnhancedInputComponent->BindAction(Action3, ETriggerEvent::Triggered, this, &ThisClass::Input_Jump);
+		
+		auto Action4 = InputData->FindInputActionByTag(R1GameplayTags::Input_Action_Attack);
+		EnhancedInputComponent->BindAction(Action4, ETriggerEvent::Triggered, this, &ThisClass::Input_Attack);
+		
 		//EnhancedInputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &ThisClass::Input_Move);
 		//EnhancedInputComponent->BindAction(TurnAction, ETriggerEvent::Triggered, this, &ThisClass::Input_Turn);
 	}
@@ -76,5 +83,16 @@ void AR1PlayerController::Input_Move(const FInputActionValue& InputValue)
 void AR1PlayerController::Input_Turn(const FInputActionValue& InputValue)
 {
 	float Val = InputValue.Get<float>();
-	AddYawInput(Val);
+	AddYawInput(InputValue.Get<FVector2D>().X);
+	AddPitchInput(InputValue.Get<FVector2D>().Y);
+}
+
+void AR1PlayerController::Input_Jump(const FInputActionValue& InputValue)
+{
+	if (AR1Player *Chara = Cast<AR1Player>(GetPawn()))
+	Chara->Jump();
+}
+
+void AR1PlayerController::Input_Attack(const FInputActionValue& InputValue)
+{
 }

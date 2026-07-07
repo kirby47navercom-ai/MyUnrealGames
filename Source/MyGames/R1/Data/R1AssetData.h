@@ -43,17 +43,17 @@ UCLASS()
 class MYGAMES_API UR1AssetData : public UPrimaryDataAsset
 {
 	GENERATED_BODY()
-	
-public:
-	
+
 public:
 	virtual void PreSave(FObjectPreSaveContext ObjectSaveContext) override;
-	
-public:
+	virtual void PostLoad() override;
+
 	FSoftObjectPath GetAssetPathByName(const FName& AssetName);
 	const FAssetSet& GetAssetSetByLabel(const FName& Label);
 
 private:
+	void RebuildLookupMaps();
+
 	UPROPERTY(EditDefaultsOnly)
 	TMap<FName, FAssetSet> AssetGroupNameToSet;
 
