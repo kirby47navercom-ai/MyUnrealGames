@@ -2,17 +2,22 @@
 
 
 #include "R1PlayerController.h"
-#include <memory>
 
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
-#include "GameFramework/CharacterMovementComponent.h"
+
+AR1PlayerController::AR1PlayerController(const FObjectInitializer& ObjectInitializer)
+{
+}
 
 void AR1PlayerController::BeginPlay()
 {
 	Super::BeginPlay();
 	if (auto *Subsystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(GetLocalPlayer()))
+	{
 		Subsystem->AddMappingContext(InputMappingContext,0);
+		
+	}
 
 }
 
@@ -43,10 +48,10 @@ void AR1PlayerController::InputTest(const FInputActionValue& InputValue)
 void AR1PlayerController::InputMove(const FInputActionValue& InputValue)
 {
 	FVector2D MovementVector = InputValue.Get<FVector2D>();
-	FRotator Rotation = GetPawn()->GetControlRotation();
+	FRotator Rotation = GetControlRotation();
 	FRotator Walk = {0,Rotation.Yaw,0};
-	FVector FowardVector = FRotationMatrix(Walk).GetUnitAxis(EAxis::Y);
-	FVector RightVector = FRotationMatrix(Walk).GetUnitAxis(EAxis::X);
+	FVector FowardVector = FRotationMatrix(Walk).GetUnitAxis(EAxis::X);
+	FVector RightVector = FRotationMatrix(Walk).GetUnitAxis(EAxis::Y);
 	GetPawn()->AddMovementInput(FowardVector,InputValue.Get<FVector2D>().X);
 	GetPawn()->AddMovementInput(RightVector,InputValue.Get<FVector2D>().Y);
 
