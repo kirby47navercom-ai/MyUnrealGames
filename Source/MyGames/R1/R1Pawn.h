@@ -25,5 +25,14 @@ public:
 
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+protected:
+	UPROPERTY(EditAnywhere,BlueprintReadOnly,Category="Charater")
+	TObjectPtr<class UCapsuleComponent> CapsuleComponent;
+	UPROPERTY(EditAnywhere,BlueprintReadOnly,Category="Charater")
+	TObjectPtr<class USkeletalMeshComponent> Mesh;
+	UPROPERTY(VisibleAnywhere,BlueprintReadOnly)
+	TObjectPtr<class USpringArmComponent> SpringArm;
+	UPROPERTY(VisibleAnywhere,BlueprintReadOnly)
+	TObjectPtr<class UCameraComponent> Camera;
 
 };
