@@ -9,6 +9,11 @@
 /**
  * 
  */
+class UR1AssetData;
+
+DECLARE_DELEGATE_TwoParams(FAsyncLoadCompletedDelegate, const FName&/*AssetName or Label*/, UObject*/*LoadedAsset*/);
+
+
 USTRUCT()
 struct FAssetEntry
 {
@@ -41,8 +46,20 @@ class MYGAMES_API UR1AssetData : public UPrimaryDataAsset
 	
 public:
 	
+public:
+	virtual void PreSave(FObjectPreSaveContext ObjectSaveContext) override;
+	
+public:
+	FSoftObjectPath GetAssetPathByName(const FName& AssetName);
+	const FAssetSet& GetAssetSetByLabel(const FName& Label);
+
 private:
 	UPROPERTY(EditDefaultsOnly)
-	TMap<FName,FAssetSet>AssetGroupNameToSet;
-	
+	TMap<FName, FAssetSet> AssetGroupNameToSet;
+
+	UPROPERTY()
+	TMap<FName, FSoftObjectPath> AssetNameToPath;
+
+	UPROPERTY()
+	TMap<FName, FAssetSet> AssetLabelToSet;	
 };

@@ -16,29 +16,16 @@ class MYGAMES_API AR1PlayerController : public APlayerController
 {
 	GENERATED_BODY()
 
+	
 public:
 	AR1PlayerController(const FObjectInitializer& ObjectInitializer);
-	
+
 protected:
 	virtual void BeginPlay() override;
 	virtual void SetupInputComponent() override;
-	virtual void Tick(float DeltaTime) override;
-	
-	float deltaTime;
 
-protected:
-	UPROPERTY(EditAnywhere, Category = Input)
-	TObjectPtr<class UInputMappingContext> InputMappingContext;
-	UPROPERTY(EditAnywhere, Category = Input)
-	TObjectPtr<class UInputAction> TestAction;
-	UPROPERTY(EditAnywhere, Category = Input)
-	TObjectPtr<class UInputAction> MoveAction;
-	UPROPERTY(EditAnywhere, Category = Input)
-	TObjectPtr<class UInputAction> TurnAction;
-	
 private:
-	void InputTest(const FInputActionValue& InputValue);
-	void InputMove(const FInputActionValue& InputValue);
-	void InputTurn(const FInputActionValue& InputValue);
+	void Input_Move(const FInputActionValue& InputValue);
+	void Input_Turn(const FInputActionValue& InputValue);
 	
 };

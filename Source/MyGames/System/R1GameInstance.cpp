@@ -3,3 +3,24 @@
 
 #include "R1GameInstance.h"
 
+#include "MyGames/R1/System/R1AssetManager.h"
+
+UR1GameInstance::UR1GameInstance(const FObjectInitializer& ObjectInitializer)
+	: Super(ObjectInitializer)
+{
+
+}
+
+void UR1GameInstance::Init()
+{
+	Super::Init();
+
+	UR1AssetManager::Initialize();
+}
+
+void UR1GameInstance::Shutdown()
+{
+	Super::Shutdown();
+
+}
+
