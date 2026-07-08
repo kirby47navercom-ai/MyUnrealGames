@@ -29,5 +29,27 @@ private:
 	void Input_Turn(const FInputActionValue& InputValue);
 	void Input_Jump(const FInputActionValue& InputValue);
 	void Input_Attack(const FInputActionValue& InputValue);
+	void Input_Active_SetDestination(const FInputActionValue& InputValue);
+	
+	void OnInputStarted();
+	void OnSetDestinationTrigger();
+	void OnSetDestinationReleased();
+	
+	
+protected:
+	UPROPERTY(EditAnywhere)
+	TObjectPtr<class UAnimMontage> AttackMontage;
+	
+	UPROPERTY(EditAnywhere,BlueprintReadOnly,Category=Input)
+	float ShortPressThreshold = 0.3f;
+
+	UPROPERTY(EditAnywhere,BlueprintReadOnly,Category=Input)
+	TObjectPtr<class UNiagaraSystem> FXCursor;
+	
+private:
+	FVector CachedDestination;
+	float FollowTime;
+	
+	
 	
 };

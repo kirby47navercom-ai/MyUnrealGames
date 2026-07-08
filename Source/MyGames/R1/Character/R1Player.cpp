@@ -20,7 +20,8 @@ AR1Player::AR1Player()
 	Camera->SetupAttachment(SpringArm);
 	
 	SpringArm->TargetArmLength = 700.0f;
-	SpringArm->SetRelativeRotation({-30,0,0});
+	SpringArm->SetRelativeRotation({-60,0,0});
+	//SpringArm->SetRelativeRotation({-30,0,0});
 	
 	
 	GetMesh()->SetRelativeLocationAndRotation({0,0,-88},{0,-90,0});
