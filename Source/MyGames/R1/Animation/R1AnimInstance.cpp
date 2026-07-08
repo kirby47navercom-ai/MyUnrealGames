@@ -35,7 +35,7 @@ void UR1AnimInstance::NativeUpdateAnimation(float DeltaSeconds)
 	GroundSpeed = Velocity.Size2D();
 	
 	bShouldMove = (GroundSpeed > 3.f&&MovementComponent->GetCurrentAcceleration()!=FVector::ZeroVector);
-	bIFalling = MovementComponent->IsFalling();
+	bIsFalling = MovementComponent->IsFalling();
 	
 	
 	

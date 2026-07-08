@@ -31,7 +31,7 @@ protected:
 	UPROPERTY(VisibleAnywhere,BlueprintReadOnly)
 	bool bShouldMove;
 	UPROPERTY(VisibleAnywhere,BlueprintReadOnly)
-	bool bIFalling;
+	bool bIsFalling;
 	
 	
 };
