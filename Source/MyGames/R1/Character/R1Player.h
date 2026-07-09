@@ -3,13 +3,16 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "GameFramework/Character.h"
+#include "R1Character.h"
 #include "R1Player.generated.h"
 
+DECLARE_DELEGATE(FRookissDelegate);
+//DECLARE_DELEGATE_OneParam(FRookissDelegate,int);
+DECLARE_MULTICAST_DELEGATE(FRookissMulticastDelegate);
 
 
 UCLASS()
-class MYGAMES_API AR1Player : public ACharacter
+class MYGAMES_API AR1Player : public AR1Character
 {
 	GENERATED_BODY()
 
@@ -24,6 +27,9 @@ protected:
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
+
+	virtual void HandleGameplayEvent(FGameplayTag EventTag) override;
+
 private:
 	UFUNCTION()
 	void OnBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult & SweepResult);
@@ -34,5 +40,13 @@ protected:
 	TObjectPtr<class USpringArmComponent> SpringArm;
 	UPROPERTY(VisibleAnywhere,BlueprintReadOnly)
 	TObjectPtr<class UCameraComponent> Camera;
+	
+	
+public:
+	UFUNCTION()
+	void TestFunc(){}
+	
+	FRookissDelegate RookissDelegate;
+	FRookissMulticastDelegate MulticastDelegate;
 
 };

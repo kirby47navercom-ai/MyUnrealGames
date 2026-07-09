@@ -3,24 +3,11 @@
 
 #include "R1Character.h"
 
-#include "Camera/CameraComponent.h"
-#include "GameFramework/SpringArmComponent.h"
-#include "Components/CapsuleComponent.h"
-
 // Sets default values
 AR1Character::AR1Character()
 {
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
-	
-	SpringArm = CreateDefaultSubobject<USpringArmComponent>("SpringArmComponent");
-	SpringArm->SetupAttachment(GetCapsuleComponent());
-	SpringArm->TargetArmLength = 700.0f;
-	
-	Camera = CreateDefaultSubobject<UCameraComponent>("Camera");
-	Camera->SetupAttachment(SpringArm);
-	
-
 }
 
 // Called when the game starts or when spawned
@@ -35,6 +22,44 @@ void AR1Character::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+}
+
+void AR1Character::HandleGameplayEvent(FGameplayTag EventTag)
+{
+}
+
+void AR1Character::Highlight()
+{
+	bHighlighted = true;
+	GetMesh()->SetRenderCustomDepth(true);
+	GetMesh()->SetCustomDepthStencilValue(250);
+}
+
+void AR1Character::UnHighlight()
+{
+	bHighlighted = false;
+	GetMesh()->SetRenderCustomDepth(false);
+}
+
+void AR1Character::OnDamaged(int32 Damage, TObjectPtr<AR1Character> Attacker)
+{
+	Hp = FMath::Clamp(Hp - Damage, 0, MaxHp);
+	if (Hp == 0)
+	{
+		OnDead(Attacker);
+	}
+
+	D(FString::Printf(TEXT("%d"), Hp));
+}
+
+void AR1Character::OnDead(TObjectPtr<AR1Character> Attacker)
+{
+	if (CreatureState == ECreatureState::Dead)
+	{
+		return;
+	}
+
+	CreatureState = ECreatureState::Dead;
 }
 
 // Called to bind functionality to input

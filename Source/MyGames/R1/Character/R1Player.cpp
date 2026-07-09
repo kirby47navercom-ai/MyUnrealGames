@@ -7,6 +7,7 @@
 #include "Camera/CameraComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "Components/CapsuleComponent.h"
+#include "../Player/R1PlayerController.h"
 
 // Sets default values
 AR1Player::AR1Player()
@@ -28,6 +29,8 @@ AR1Player::AR1Player()
 	
 	GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
 	
+	
+	
 }
 
 // Called when the game starts or when spawned
@@ -37,6 +40,19 @@ void AR1Player::BeginPlay()
 	
 	GetCapsuleComponent()->OnComponentBeginOverlap.AddDynamic(this,&ThisClass::OnBeginOverlap);
 	
+	//델리게이트
+	// RookissDelegate.BindUObject(this,&ThisClass::TestFunc);
+	//
+	// RookissDelegate.Execute();
+	//
+	// RookissDelegate.Unbind();
+	//
+	// auto h1 = MulticastDelegate.AddUObject(this,&ThisClass::TestFunc);
+	//
+	// MulticastDelegate.Broadcast();
+	// MulticastDelegate.Remove(h1);
+	// MulticastDelegate.RemoveAll(this);
+	
 }
 
 // Called every frame
@@ -44,6 +60,15 @@ void AR1Player::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+}
+
+void AR1Player::HandleGameplayEvent(FGameplayTag EventTag)
+{
+	AR1PlayerController* PC = Cast<AR1PlayerController>(GetController());
+	if (PC)
+	{
+		PC->HandleGameplayEvent(EventTag);
+	}
 }
 
 void AR1Player::OnBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,

@@ -37,6 +37,10 @@
 		{
 			"Name": "MCPUnreal",
 			"Enabled": true
+		},
+		{
+			"Name": "XRBase",
+			"Enabled": true
 		}
 	]
 }

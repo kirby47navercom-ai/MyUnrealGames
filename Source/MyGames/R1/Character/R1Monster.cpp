@@ -8,6 +8,8 @@ AR1Monster::AR1Monster()
 {
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
+	
+	GetMesh()->SetRelativeLocationAndRotation({0.f,0.f,-88.f},{0,-90,0});
 
 }
 
