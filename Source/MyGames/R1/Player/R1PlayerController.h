@@ -36,6 +36,8 @@ private:
 	void OnSetDestinationReleased();
 	
 	
+	
+	
 protected:
 	UPROPERTY(EditAnywhere)
 	TObjectPtr<class UAnimMontage> AttackMontage;

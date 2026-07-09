@@ -25,12 +25,17 @@ AR1Player::AR1Player()
 	
 	
 	GetMesh()->SetRelativeLocationAndRotation({0,0,-88},{0,-90,0});
+	
+	GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
+	
 }
 
 // Called when the game starts or when spawned
 void AR1Player::BeginPlay()
 {
 	Super::BeginPlay();
+	
+	GetCapsuleComponent()->OnComponentBeginOverlap.AddDynamic(this,&ThisClass::OnBeginOverlap);
 	
 }
 
@@ -39,6 +44,12 @@ void AR1Player::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+}
+
+void AR1Player::OnBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
+	UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
+{
+	
 }
 
 
