@@ -6,6 +6,8 @@ public class R1 : ModuleRules
 {
 	public R1(ReadOnlyTargetRules Target) : base(Target)
 	{
+		CppCompileWarningSettings.ShadowVariableWarningLevel = WarningLevel.Warning;
+
 		PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
 
 		PublicIncludePaths.AddRange(new string[]
