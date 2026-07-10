@@ -15,12 +15,11 @@ class R1_API AR1AIController : public AAIController
 	GENERATED_BODY()
 	
 public:
-	AR1AIController(const FObjectInitializer& ObjectInitializer);
-	
-	virtual void OnPossess(APawn* Pawn) override;
-	
+	AR1AIController(const FObjectInitializer& ObjectInitializer = FObjectInitializer::Get());
+
+	virtual void OnPossess(class APawn* InPawn) override;
+
 protected:
 	virtual void BeginPlay() override;
 	virtual void Tick(float DeltaTime) override;
-	
 };
