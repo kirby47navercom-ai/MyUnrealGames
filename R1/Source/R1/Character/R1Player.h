@@ -21,7 +21,8 @@ public:
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
-
+	virtual void PossessedBy(AController* NewController) override;
+	virtual void InitAbilitySystem() override;
 public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;

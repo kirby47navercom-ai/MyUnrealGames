@@ -21,6 +21,8 @@ public class R1 : ModuleRules
 			"InputCore", 
 			"EnhancedInput", 
 			"GameplayTags",
+			"GameplayTasks",
+			"GameplayAbilities",
 			"NavigationSystem",
 			"AIModule",
 			"Niagara",

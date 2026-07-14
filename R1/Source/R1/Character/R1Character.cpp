@@ -8,6 +8,7 @@
 #include "R1Define.h"
 #include "Components/WidgetComponent.h"
 #include "UI/R1HpBarWidget.h"
+#include  "AbilitySystem/R1AbilitySystemComponent.h"
 
 // Sets default values
 AR1Character::AR1Character()
@@ -89,4 +90,13 @@ void AR1Character::RefreshHpBarRatio()
 		UR1HpBarWidget* HpBar = Cast<UR1HpBarWidget>(HpBarComponent->GetUserWidgetObject());
 		HpBar->SetHpRatio(Ratio);
 	}
+}
+
+UAbilitySystemComponent* AR1Character::GetAbilitySystemComponent() const
+{
+	return AbilitySystemComponent;
+}
+
+void AR1Character::InitAbilitySystem()
+{
 }

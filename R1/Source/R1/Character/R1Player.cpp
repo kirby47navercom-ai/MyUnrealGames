@@ -4,6 +4,8 @@
 #include "Camera/CameraComponent.h"
 #include "Components/CapsuleComponent.h"
 #include "Player/R1PlayerController.h"
+#include "AbilitySystem/R1AbilitySystemComponent.h"
+#include "Player/R1PlayerState.h"
 
 AR1Player::AR1Player()
 {
@@ -36,6 +38,23 @@ void AR1Player::BeginPlay()
 {
 	Super::BeginPlay();
 
+}
+
+void AR1Player::PossessedBy(AController* NewController)
+{
+	Super::PossessedBy(NewController);
+	InitAbilitySystem();
+}
+
+void AR1Player::InitAbilitySystem()
+{
+	Super::InitAbilitySystem();
+	
+	if (AR1PlayerState* PS = GetPlayerState<AR1PlayerState>())
+	{
+		AbilitySystemComponent = Cast<UR1AbilitySystemComponent>(PS->GetAbilitySystemComponent());
+		AbilitySystemComponent->InitAbilityActorInfo(PS,this);
+	}
 }
 
 void AR1Player::Tick(float DeltaTime)
