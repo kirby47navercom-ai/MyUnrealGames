@@ -30,4 +30,5 @@ protected:
 	TObjectPtr<UR1AbilitySystemComponent> AbilitySystemComponent;
 	UPROPERTY()
 	TObjectPtr<UMyPlayerSet> PlayerSet;
+
 };

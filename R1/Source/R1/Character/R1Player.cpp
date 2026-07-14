@@ -38,6 +38,16 @@ AR1Player::AR1Player()
 void AR1Player::BeginPlay()
 {
 	Super::BeginPlay();
+	
+	if (TestEffect && AbilitySystemComponent)
+	{
+		FGameplayEffectContextHandle EffectContext = AbilitySystemComponent->MakeEffectContext();
+		EffectContext.AddSourceObject(this);
+		
+		FGameplayEffectSpecHandle EffectSpecHandle = AbilitySystemComponent->MakeOutgoingSpec(TestEffect,1,EffectContext);
+		
+		AbilitySystemComponent ->ApplyGameplayEffectSpecToSelf(*EffectSpecHandle.Data.Get());
+	}
 
 }
 
