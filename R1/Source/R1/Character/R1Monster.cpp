@@ -1,11 +1,12 @@
 #include "Character/R1Monster.h"
 #include "AbilitySystem//R1AbilitySystemComponent.h"
+#include "AbilitySystem/R1AttributeSet.h"
 
 AR1Monster::AR1Monster()
 {
 	GetMesh()->SetRelativeLocationAndRotation(FVector(0.f, 0.f, -88.f), FRotator(0.f, -90.f, 0.f));
 	AbilitySystemComponent = CreateDefaultSubobject<UR1AbilitySystemComponent>("AbilitySystem");
-	//AbilitySystemComponent->SetIsReplicated(true);
+	AttributeSet = CreateDefaultSubobject<UR1AttributeSet>("AttributeSet");
 }
 
 void AR1Monster::BeginPlay()

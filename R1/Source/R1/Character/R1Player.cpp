@@ -6,6 +6,7 @@
 #include "Player/R1PlayerController.h"
 #include "AbilitySystem/R1AbilitySystemComponent.h"
 #include "Player/R1PlayerState.h"
+#include "AbilitySystem/MyPlayerSet.h"
 
 AR1Player::AR1Player()
 {
@@ -54,6 +55,8 @@ void AR1Player::InitAbilitySystem()
 	{
 		AbilitySystemComponent = Cast<UR1AbilitySystemComponent>(PS->GetAbilitySystemComponent());
 		AbilitySystemComponent->InitAbilityActorInfo(PS,this);
+	
+		AttributeSet = PS->GetR1PlayerSet();
 	}
 }
 

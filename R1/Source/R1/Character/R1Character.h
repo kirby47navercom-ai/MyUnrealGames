@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "AbilitySystemComponent.h"
 #include "GameFramework/Character.h"
 #include "Interface/R1HighlightInterface.h"
 #include "R1Define.h"
@@ -11,7 +12,8 @@
 #include "R1Character.generated.h"
 
 UCLASS()
-class R1_API AR1Character : public ACharacter, public IR1HighlightInterface
+class R1_API AR1Character : public ACharacter, public IR1HighlightInterface,
+public IAbilitySystemInterface
 {
 	GENERATED_BODY()
 
@@ -50,19 +52,12 @@ public:
 	UPROPERTY(BlueprintReadWrite)
 	ECreatureState CreatureState = ECreatureState::Moving;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	int32 Hp = 100;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	int32 MaxHp = 100;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	int32 FinalDamage = 10;
-
 public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	TObjectPtr<class UWidgetComponent> HpBarComponent;
 protected:
 	UPROPERTY(VisibleAnywhere,BlueprintReadOnly)
 	TObjectPtr<class UR1AbilitySystemComponent> AbilitySystemComponent;
+	UPROPERTY(VisibleAnywhere,BlueprintReadOnly)
+	TObjectPtr<class UR1AttributeSet> AttributeSet;
 };
