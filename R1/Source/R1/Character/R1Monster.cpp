@@ -11,7 +11,7 @@ AR1Monster::AR1Monster()
 void AR1Monster::BeginPlay()
 {
 	Super::BeginPlay();
-	InitAbilitySystem(;
+	InitAbilitySystem();
 
 }
 
